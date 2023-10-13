@@ -12,6 +12,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -32,6 +34,8 @@ public class Student {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer studentId;
 	@Column
+	@NotBlank
+	@Pattern(regexp ="^King[1-2]",message = "Please Provide Valid Name")
 	private String studentName;
 	@Column
 	private Integer studentAge;

@@ -18,4 +18,14 @@ public interface StudentService  {
 	
 	public void deleteByStudentId(Integer studentId);
 
+	public List<Student> findByStudentName(String studentName);
+	
+
+
+	public List<Student> findByStudentNameLike(String studentNameLike);
+	
+
+	public List<Student> dataFromStudentTwo(String studentName,Integer studentAge);
+
+
 }

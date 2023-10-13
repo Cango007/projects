@@ -45,6 +45,26 @@ public class StudentServiceImpl implements StudentService {
 		// TODO Auto-generated method stub
 		studentDao.deleteById(studentId);
 	}
+
+	@Override
+	public List<Student> findByStudentName(String studentName) {
+		// TODO Auto-generated method stub
+		return studentDao.findByStudentName(studentName);
+	}
+
+	@Override
+	public List<Student> findByStudentNameLike(String studentNameLike) {
+		// TODO Auto-generated method stub
+		return studentDao.findByStudentNameLike(studentNameLike);
+	}
+
+	@Override
+	public List<Student> dataFromStudentTwo(String studentName, Integer studentAge) {
+		// TODO Auto-generated method stub
+		return studentDao.dataFromStudentTwo(studentName, studentAge);
+	}
+
+
 	
 	
 	

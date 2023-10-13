@@ -3,6 +3,8 @@ package com.slokam.StudentInformation.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,28 +23,40 @@ public class StudentController {
   @Autowired
 	private StudentService studentService;
 	@PostMapping("/save")
-	public Student saveStudent(@RequestBody Student student)
+	public ResponseEntity<Student> saveStudent(@RequestBody Student student)
 	{
-	return	 studentService.saveStudent(student);
+	return	new ResponseEntity<Student>(studentService.saveStudent(student),HttpStatus.CREATED);
 	}
 	@PutMapping("/update")
-	public void updateStudent(@RequestBody Student student)
+	public ResponseEntity<Student> updateStudent(@RequestBody Student student)
 	{
-		studentService.saveStudent(student);
+	return new ResponseEntity<Student>(studentService.saveStudent(student),HttpStatus.OK);
 	}
 	@GetMapping("/findAllStudents")
-	public List<Student> findAllStudents()
+	public ResponseEntity<List<Student>> findAllStudents()
 	{
-		return studentService.findAllStudents();
+		return new ResponseEntity<List<Student>>(studentService.findAllStudents(),HttpStatus.OK);
 	}
 	@GetMapping("/findById/{studentId}")
-	public Student findById(@PathVariable("studentId") Integer studentId)
+	public ResponseEntity<List<ResponseEntity<Student>>> findById(@PathVariable("studentId") Integer studentId)
 	{
-		return studentService.findById(studentId);
+		return new ResponseEntity<List<ResponseEntity<Student>>>( (List<ResponseEntity<Student>>) studentService.findById(studentId),HttpStatus.OK);
 	}
 	@DeleteMapping("/deleteById/{studentId}")
 	public void deleteByStudentId(@PathVariable("studentId") Integer studentId)
 	{
 		studentService.deleteByStudentId(studentId);
 	}
+	@GetMapping("/findByName/{studentName}")
+	public List<Student> findByName(@PathVariable("studentName") String studentName)
+	{
+	return	studentService.findByStudentName(studentName);
+		
+	}
+	@GetMapping("getData/{studentName}/{studentAge}")
+	public List<Student> getDataFromTwo(@PathVariable("studentName") String studentName,@PathVariable("studentAge") Integer studentAge)
+	{
+		return studentService.dataFromStudentTwo(studentName, studentAge);
+	}
+
 }
